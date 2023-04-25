@@ -23,9 +23,9 @@ class User(db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     password = db.Column(db.String(128))
 
-
-with app.app_context():
-    db.create_all()
+# Uncomment the 2 line of code below when first deploying the site to Render in order to create the PostgreSQL database.
+# with app.app_context():
+#     db.create_all()
 
 
 @app.route('/', methods=['GET', 'POST'])
