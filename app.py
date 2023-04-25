@@ -24,6 +24,10 @@ class User(db.Model):
     password = db.Column(db.String(128))
 
 
+with app.app_context():
+    db.create_all()
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
