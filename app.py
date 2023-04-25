@@ -1,15 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, init, upgrade
+import os
 
-USERNAME = 'postgresql_practice_database_user'
-PASSWORD = '4ycTydQTbskjZlRTfH8MXl6kQS06FPB9'
-DBNAME = 'postgresql-practice-database'
-HOST = 'dpg-ch3te4aut4m1v1o5qgsg-a'
+LOCAL_USERNAME = 'rob_hayward'
+LOCAL_PASSWORD = 'new_password'
+LOCAL_DBNAME = 'testdb'
+
+DATABASE_URL = os.environ.get('DATABASE_URL') or f'postgresql://{LOCAL_USERNAME}:{LOCAL_PASSWORD}@localhost/{LOCAL_DBNAME}'
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+
+# postgres://postgresql_practice_database_user:4ycTydQTbskjZlRTfH8MXl6kQS06FPB9@dpg-ch3te4aut4m1v1o5qgsg-a/postgresql_practice_database
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DBNAME}'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgresql_practice_database_user:4ycTydQTbskjZlRTfH8MXl6kQS06FPB9@dpg-ch3te4aut4m1v1o5qgsg-a/postgresql_practice_database'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
