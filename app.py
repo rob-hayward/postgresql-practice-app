@@ -3,12 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, init, upgrade
 import os
 
+app = Flask(__name__)
+
 LOCAL_USERNAME = 'rob_hayward'
 LOCAL_PASSWORD = 'new_password'
 LOCAL_DBNAME = 'testdb'
 DATABASE_URL = os.environ.get('DATABASE_URL') or f'postgresql://{LOCAL_USERNAME}:{LOCAL_PASSWORD}@localhost/{LOCAL_DBNAME}'
 
-app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 
