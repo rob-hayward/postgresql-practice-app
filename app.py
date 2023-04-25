@@ -6,14 +6,11 @@ import os
 LOCAL_USERNAME = 'rob_hayward'
 LOCAL_PASSWORD = 'new_password'
 LOCAL_DBNAME = 'testdb'
-
 DATABASE_URL = os.environ.get('DATABASE_URL') or f'postgresql://{LOCAL_USERNAME}:{LOCAL_PASSWORD}@localhost/{LOCAL_DBNAME}'
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-
-# postgres://postgresql_practice_database_user:4ycTydQTbskjZlRTfH8MXl6kQS06FPB9@dpg-ch3te4aut4m1v1o5qgsg-a/postgresql_practice_database
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
