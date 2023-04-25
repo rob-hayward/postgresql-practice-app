@@ -8,7 +8,8 @@ app = Flask(__name__)
 LOCAL_USERNAME = 'rob_hayward'
 LOCAL_PASSWORD = 'new_password'
 LOCAL_DBNAME = 'testdb'
-DATABASE_URL = os.environ.get('DATABASE_URL') or f'postgresql://{LOCAL_USERNAME}:{LOCAL_PASSWORD}@localhost/{LOCAL_DBNAME}'
+DATABASE_URL = os.environ.get('DATABASE_URL') \
+               or f'postgresql://{LOCAL_USERNAME}:{LOCAL_PASSWORD}@localhost/{LOCAL_DBNAME}'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
@@ -35,6 +36,8 @@ def index():
     users = User.query.all()
     return render_template('index.html', users=users)
 
+
+print("Using database:", DATABASE_URL)
 
 if __name__ == '__main__':
     app.run(debug=True)
